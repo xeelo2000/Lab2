@@ -2,14 +2,16 @@
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+	//int count = 0;
 
 	public MainPage()
 	{
 		InitializeComponent();
-	}
+        //EntriesLV.ItemsSource = MauiProgram.
 
-	private void OnCounterClicked(object sender, EventArgs e)
+    }
+
+	/*private void OnCounterClicked(object sender, EventArgs e)
 	{
 		count++;
 
@@ -19,6 +21,6 @@ public partial class MainPage : ContentPage
 			CounterBtn.Text = $"Clicked {count} times";
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+	}*/
 }
 
