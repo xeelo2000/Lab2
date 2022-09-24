@@ -4,40 +4,22 @@
              x:Class="Lab2.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+               
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
 
-            <ListView x:Name="EntriesLV">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid RowSpacing="6" ColumnSpacing="10" Padding="10">
-
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
-                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Title}"/>
-                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding NumStars}" FontAttributes="Bold" />
-
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <Button Text="Add Entry" Clicked="AddMovie"/>
-            <Button Text="Delete Entry" Clicked="ChangeMovie"/>
-            <Button Text="Edit Entry" Clicked="AddMovie"/>
-            
-        </VerticalStackLayout>
+            <VerticalStackLayout BackgroundColor ="Red" Grid.Row="0" Grid.Column="0">
+                <Button Text="Add Entry" Clicked="AddMovie"/>
+                <Button Text="Delete Entry" Clicked="ChangeMovie"/>
+                <Button Text="Edit Entry" Clicked="AddMovie"/>
+            </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 
 </ContentPage>
