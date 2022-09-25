@@ -1,11 +1,7 @@
-﻿using System;
-
-namespace Lab2
+﻿namespace Lab2
 {
-     interface IUserInterface
+    public interface IUserInterface
     {
-        void InterfaceOption(string input);
-        bool CheckInputErrors(string userInput);
         void DisplayMenu();
     }
 }

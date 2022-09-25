@@ -1,14 +1,13 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace Lab2
 {
-    interface IBusinessLogic
+    public interface IBusinessLogic
     {
-        bool CheckEntryInputs(string clue, string answer, string difficulty, string date, string input);
-        void AddEntry(string clue, string answer, string difficulty, string date);
-        void DeleteEntry(int id);
-        void EditEntry(int id, string clue, string answer, string difficulty, string date);
-        void getAllEntries();
-        bool CheckID(string id, string input);
+        InvalidFieldError AddEntry(string clue, string answer, int difficulty, string date);
+        EntryDeletionError DeleteEntry(int entryId);
+        EntryEditError EditEntry(string clue, string answer, int difficulty, string date, int id);
+        Entry FindEntry(int id);
+        List<Entry> GetEntries();
     }
 }

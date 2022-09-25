@@ -1,113 +1,168 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab2
 {
-     class UserInterface : IUserInterface
+    public class UserInterface : IUserInterface
     {
-        string clue;
-        string answer;
-        string difficulty;
-        string date;
-        IBusinessLogic bl = new BusinessLogic();
+        IBusinessLogic bl;
+
+        public UserInterface(BusinessLogic bl)
+        {
+            this.bl = bl;
+        }
 
 
         public void DisplayMenu()
         {
-            Console.Write(" Menu\n ====\n 1. List Entries\n 2. Add Entry\n" +
-                    " 3. Delete Entry\n 4. Edit Entry\n 5. Quit\n Choice: ");
+            Boolean done = false;
+            while (!done)
+            {
+                Console.WriteLine("\nMenu\n====");
+                Console.WriteLine("1. List Entries ");
+                Console.WriteLine("2. Add Entry");
+                Console.WriteLine("3. Delete Entry");
+                Console.WriteLine("4. Edit Entry");
+                Console.WriteLine("5. Quit");
+                Console.Write("Choice: ");
+                int choice = int.Parse(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1: ListEntries(); break;
+                    case 2: AddEntry(); break;
+                    case 3: DeleteEntry(); break;
+                    case 4: EditEntry(); break;
+                    case 5: done = true; break;
+                }
+            }
+
+            Console.WriteLine("Goodbye");
+            System.Environment.Exit(0);
         }
 
-        /*
-         * This will check user input to see if it was correct
-         * @param string input - userinput that needs to read
-         */
-        public bool CheckInputErrors(string userInput)
+        private void ListEntries()
         {
-            int convertInput;
-            //if userinput is an int then true, if convertinput after being converted is a number from 1 - 5 then true 
-            if (int.TryParse(userInput, out convertInput) && (convertInput >= 1 && convertInput <= 5))
-            {  
-                return true;
-            }
-            else
+            Console.WriteLine("\nEntries\n=======");
+
+            List<Entry> entries = bl.GetEntries();
+            foreach (Entry entry in entries)
             {
-                return false;
-            }
+                Console.WriteLine("{3}. {0}, {1}, {2}", entry.Clue, entry.Answer, entry.Difficulty, entry.Id);
+            };
+
         }
 
-        /*
-         * This will excute what the program should do based on userinput 
-         * @param string input - userinput that needs to read
-         */
-        public void InterfaceOption(string input)
+        private void AddEntry()
         {
-            switch (input)
-            {
-                case "1":
-                    Console.WriteLine(" \n Entries\n =======");
-                    bl.getAllEntries(); //call to list all the entries
-                    break;
-                case "2":
-                    DisplayAddEntry(2);//displays the correct interface
-                    if (bl.CheckEntryInputs(clue, answer, difficulty, date, input))//checks the entry
-                    {
-                        bl.AddEntry(clue, answer, difficulty, date);//adds it if its correct
-                    }
-                    break;
-                case "3":
-                    Console.Write(" Id to Delete: ");
-                    string inputId = Console.ReadLine();
-                    if (bl.CheckID(inputId, input))//checks to see if the id exists
-                    {
-                        bl.DeleteEntry(int.Parse(inputId));//parses the id and deletes the correct entry
-                    }
-                    break;
-                case "4":
-                    Console.Write(" Id to Edit: ");
-                   
-                    inputId = Console.ReadLine();
-                    if (bl.CheckID(inputId, input))//checks the id
-                    {
-                        DisplayAddEntry(4);
-                        if (bl.CheckEntryInputs(clue, answer, difficulty, date, input))//checks inputs
-                        {
-                            bl.EditEntry(int.Parse(inputId), clue, answer, difficulty, date);//edits the entry with the givin inputs
-                        }
-                    }    
-                    break;
+            String clue;
+            String answer;
+            int difficulty;
+            String date;
 
-                case "5":
-                    System.Environment.Exit(0);//exits program
-                    break;
-            }
-        }
-
-        void DisplayAddEntry(int entryToDisplay)
-        {
-            //because AddEntry and EditEntry both have the same interface this will be displayed for both 
-            switch (entryToDisplay)
-            {
-                case 2:
-                    Console.WriteLine(" \n Adding Entry\n ==============");
-                    break;
-                case 4:
-                    Console.WriteLine(" \n Editing Entry\n ==============");
-                    break;
-            }
-
-            Console.Write(" Clue: ");
+            Console.WriteLine("\nAdding Entry\n==============");
+            Console.Write("Clue: ");
             clue = Console.ReadLine();
-            Console.Write(" \n Answer: ");
+            Console.Write("Answer: ");
             answer = Console.ReadLine();
-            Console.Write(" \n Diffculty: ");
-            difficulty = Console.ReadLine();
-            Console.Write(" \n Date (mm/dd/yyyy): ");
-            date = Console.ReadLine(); 
-            Console.WriteLine("");
+
+            difficulty = GetValidDifficulty();
+
+            Console.Write("Date (mm/dd/yyyy): ");
+            date = Console.ReadLine();
+
+            InvalidFieldError result = bl.AddEntry(clue, answer, difficulty, date);
+            if (result != InvalidFieldError.NoError)
+            {
+                Console.WriteLine("Error while creating entry: {0}", result);
+            }
+
         }
+
+        private int GetValidId(string purpose)
+        {
+            int id;
+            bool idValid;
+            do
+            {
+                Console.Write("Id to {0}: ", purpose);
+                idValid = int.TryParse(Console.ReadLine(), out id);
+                if (!idValid)
+                {
+                    Console.WriteLine("Id must be an integer. Try again.");
+                }
+            } while (!idValid);
+
+            return id;
+        }
+
+        private int GetValidDifficulty()
+        {
+            int difficulty;
+            bool difficultyValid;
+            do
+            {
+                Console.Write("Difficulty: ");
+                difficultyValid = int.TryParse(Console.ReadLine(), out difficulty);
+                if (!difficultyValid)
+                {
+                    Console.WriteLine("Difficulty must be an integer. Try again. ");
+                }
+            } while (!difficultyValid);
+
+            return difficulty;
+        }
+
+
+        private void DeleteEntry()
+        {
+
+            int id = GetValidId("delete");
+            EntryDeletionError result = bl.DeleteEntry(id);
+            if (result != EntryDeletionError.NoError)
+            {
+                Console.WriteLine("Error while deleting entry: {0}", result);
+            }
+        }
+
+        private void EditEntry()
+        {
+
+
+            String clue;
+            String answer;
+            int difficulty;
+            String date;
+
+            int id = GetValidId("Edit");
+
+            Entry entryToEdit = bl.FindEntry(id);
+            while (entryToEdit == null)
+            {
+                Console.WriteLine("Entry with Id {0} not found. Try again.", id);
+                id = GetValidId("Edit");
+                entryToEdit = bl.FindEntry(id);
+            }
+
+            Console.WriteLine("\nEditing Entry\n==============");
+            Console.Write("Clue: ");
+            clue = Console.ReadLine();
+            Console.Write("Answer: ");
+            answer = Console.ReadLine();
+
+            difficulty = GetValidDifficulty();
+
+            Console.Write("Date (mm/dd/yyyy): ");
+            date = Console.ReadLine();
+
+            EntryEditError result = bl.EditEntry(clue, answer, difficulty, date, id);
+            if (result != EntryEditError.NoError)
+            {
+                Console.WriteLine("Error while editing entry: {0}", result);
+            }
+
+        }
+
+
     }
 }

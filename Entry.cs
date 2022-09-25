@@ -1,33 +1,27 @@
 ﻿using System;
-using CommunityToolkit.Mvvm.ComponentModel;
-
 namespace Lab2
 {
-    public class Entry : ObservableObject
+    [Serializable()]
+    public class Entry : IEquatable<Entry>
     {
-        public String clue { get; set; }
-        public String answer { get; set; }
-        public int difficulty { get; set; }
-        public String date { get; set; }
-        public int id { get; set; }
+        public String Clue { get; set; }
+        public String Answer { get; set; }
+        public int Difficulty { get; set; }
+        public String Date { get; set; }
+        public int Id { get; set; }
 
-        public Entry()
+        public Entry(String clue, String answer, int difficulty, String date, int id)
         {
-
+            this.Clue = clue;
+            this.Answer = answer;
+            this.Difficulty = difficulty;
+            this.Date = date;
+            this.Id = id;
         }
 
-        /// <summary>
-        /// Compares one Entry's id with another
-        /// </summary>
-        /// <param name="other">The Entry that is gonna be compared</param>
-        /// <returns>
-        /// True        the id's are equal
-        /// False       the id's aren't equal
-        /// </returns>
         public bool Equals(Entry other)
         {
-            return id == other.id;
+            return Id == other.Id;
         }
     }
 }
-

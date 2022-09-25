@@ -1,152 +1,148 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Lab2
 {
-    
-    class BusinessLogic : IBusinessLogic
+
+    public enum InvalidFieldError
     {
-        int id;//incremeting the id based on entries being entered 
-        public static Dictionary<int, string> entries = new Dictionary<int, string>(); //entries will be stored 
-        IFlatDatabase fd = new FlatDatabase();
-        
+        InvalidClueLength,
+        InvalidAnswerLength,
+        InvalidDifficulty,
+        InvalidDate,
+        NoError
+    }
 
+    public enum EntryDeletionError
+    {
+        EntryNotFound,
+        DBDeletionError,
+        NoError
+    }
 
-        /*
-         * This will print out an error message 
-         * @param string input - userinput that needs to read
-         */
-        void ErrorEntry(string input)
+    public enum EntryEditError
+    {
+        EntryNotFound,
+        InvalidFieldError,
+        DBEditError,
+        NoError
+    }
+    public class BusinessLogic : IBusinessLogic
+    {
+        const int MAX_CLUE_LENGTH = 250;
+        const int MAX_ANSWER_LENGTH = 21;
+        const int MAX_DIFFICULTY = 5;
+        int latestId = 0;
+
+        IUserInterface ui;
+        IDatabase db;
+
+        public BusinessLogic()
         {
-            switch (input)
-            {
-                case "2":
-                    Console.WriteLine(" Error While Adding Entry: ");
-                    break;
-                case "3":
-                    Console.WriteLine(" Error While Deleting: ");
-                    break;
-                case "4":
-                    Console.WriteLine(" Error While Editing: ");
-                    break;
-            }
+            db = new Database();
+            ui = new UserInterface(this);
+            ui.DisplayMenu();
         }
 
-        /*
-         * This will check each string the user input when trying to add an entry to see if it was correct
-         * @param 
-         * string clue 
-         * string answer 
-         * string difficulty 
-         * DateTime date 
-         * string input
-         */
-        public bool CheckEntryInputs(string clue, string answer, string difficulty, string date, string input)//need to consider datetime/white space
+
+        public List<Entry> GetEntries()
         {
-            //Console.WriteLine(Regex.IsMatch(clue, @"^[a-zA-Z]+$"));
-            if  (clue.Length < 0 && clue.Length > 201 || clue.Equals(""))//can clues be numbers?
+            return db.GetEntries();
+        }
+
+        public Entry FindEntry(int id)
+        {
+            return db.FindEntry(id);
+        }
+
+        private InvalidFieldError CheckEntryFields(string clue, string answer, int difficulty, string date)
+        {
+            if (clue.Length < 1 || clue.Length > MAX_CLUE_LENGTH)
             {
-                ErrorEntry(input);
-                Console.WriteLine(" InvalidClueLength\n");
-                return false;
+                return InvalidFieldError.InvalidClueLength;
             }
-            if (answer.Length <= 0 && answer.Length > 26 || answer.Equals(""))//can answers be numbers?
+            if (answer.Length < 1 || answer.Length > MAX_ANSWER_LENGTH)
             {
-                ErrorEntry(input);
-                Console.WriteLine(" InvalidAnswerLength\n");
-                return false;
+                return InvalidFieldError.InvalidAnswerLength;
             }
-            if ((!difficulty.Equals("0")) && (!difficulty.Equals("1")) && (!difficulty.Equals("2")))
+            if (difficulty < 1 || difficulty > MAX_DIFFICULTY)
             {
-                ErrorEntry(input);
-                Console.WriteLine(" InvalidDifficulty\n");
-                return false;
+                return InvalidFieldError.InvalidDifficulty;
             }
-            if (!DateTime.TryParse(date, out DateTime result))
+
+            return InvalidFieldError.NoError;
+        }
+
+
+        public InvalidFieldError AddEntry(string clue, string answer, int difficulty, string date)
+        {
+
+            var result = CheckEntryFields(clue, answer, difficulty, date);
+            if (result != InvalidFieldError.NoError)
             {
-                ErrorEntry(input);
-                Console.WriteLine(" InvalidDate\n");
-                return false;
-            }//need another if here 
+                return result;
+            }
+            Entry entry = new Entry(clue, answer, difficulty, date, ++latestId);
+            db.AddEntry(entry);
+
+            return InvalidFieldError.NoError;
+        }
+
+        public EntryDeletionError DeleteEntry(int entryId)
+        {
+
+            var entry = db.FindEntry(entryId);
+
+            if (entry != null)
+            {
+                bool success = db.DeleteEntry(entry);
+                if (success)
+                {
+                    return EntryDeletionError.NoError;
+
+                }
+                else
+                {
+                    return EntryDeletionError.DBDeletionError;
+                }
+            }
             else
             {
-                return true;
+                return EntryDeletionError.EntryNotFound;
             }
         }
 
-
-        /*
-         * converts the string input into a int 
-         * @param string input - userinput that needs to read
-         * string id - id the user wants to edit
-         * 
-         * return bool
-         */
-        public bool CheckID(string id, string input)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clue"></param>
+        /// <param name="answer"></param>
+        /// <param name="difficulty"></param>
+        /// <param name="date"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public EntryEditError EditEntry(string clue, string answer, int difficulty, string date, int id)
         {
-            if(int.TryParse(id, out int convertID) && GetId(convertID))
+
+            var fieldCheck = CheckEntryFields(clue, answer, difficulty, date);
+            if (fieldCheck != InvalidFieldError.NoError)
             {
-                return true;
+                return EntryEditError.InvalidFieldError;
             }
-            else
+
+            var entry = db.FindEntry(id);
+            entry.Clue = clue;
+            entry.Answer = answer;
+            entry.Difficulty = difficulty;
+            entry.Date = date;
+
+            bool success = db.ReplaceEntry(entry);
+            if (!success)
             {
-                ErrorEntry(input);
-                Console.WriteLine(" NoEntryFound\n");
-                return false;
+                return EntryEditError.DBEditError;
             }
-        }
 
-        //this will add the entry into the list 
-        //@param string clue, string answer, string difficulty, string date
-        public void AddEntry(string clue, string answer, string difficulty, string date)
-        {
-            id++;
-            entries.Add(id, clue + ", " + answer + ", " + difficulty + ", " + date.ToString());
-            fd.AddEntry(entries);
-        }
-
-        //delete the entry with the desired ID
-        //@param int id - which id to delete
-        public void DeleteEntry(int id)
-        {
-            entries.Remove(id);
-            fd.AddEntry(entries);
-            
-        }
-
-        //edit the entry with the desired ID
-        //@param int id, string clue, string answer, string difficulty, string date 
-        public void EditEntry(int id, string clue, string answer, string difficulty, string date)
-        {
-            Dictionary<int, string> editEntry = new Dictionary<int, string>();
-            
-
-            entries[id] = (clue + ", " + answer + ", " + difficulty + ", " + date.ToString());
-            fd.AddEntry(entries);
-             
-        }
-
-        //retreives all the entries and writes it to the UI
-        public void getAllEntries()
-        {
-            foreach (KeyValuePair<int, string> entry in entries)
-            {
-                Console.WriteLine("{0}. {1}", entry.Key, entry.Value);
-            }
-            Console.WriteLine("");
-            
-        }
-
-
-        //checks to see if the entry exists using the id
-        //returns bool
-        public bool GetId(int id)
-        {
-            return entries.ContainsKey(id);
+            return EntryEditError.NoError;
         }
     }
 }

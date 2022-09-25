@@ -2,7 +2,9 @@
 
 public static class MauiProgram
 {
-	public static MauiApp CreateMauiApp()
+    //public static IDatabase entryDB = new Database();
+
+    public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
 		builder

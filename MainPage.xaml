@@ -16,35 +16,36 @@
 
             <!--The buttons-->
             <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="20" VerticalOptions="Center">
-                <Button Text="Add Entry" Margin="20" HeightRequest="200" BackgroundColor="White" TextColor="Black" FontSize="24.0" BorderColor="Black" BorderWidth="5"/>
-                <Button Text="Delete Entry" Margin="20" HeightRequest="200" BackgroundColor="White" TextColor="Black" FontSize="24.0" BorderColor="Black" BorderWidth="5"/>
-                <Button Text="Edit Entry" Margin="20" HeightRequest="200" BackgroundColor="White" TextColor="Black" FontSize="24.0" BorderColor="Black" BorderWidth="5"/>
+                <Button Text="Add Entry" Margin="10" HeightRequest="200" BackgroundColor="White" TextColor="Black" FontSize="24.0" BorderColor="Black" BorderWidth="5"/>
+                <Button Text="Delete Entry" Margin="10" HeightRequest="200" BackgroundColor="White" TextColor="Black" FontSize="24.0" BorderColor="Black" BorderWidth="5"/>
+                <Button Text="Edit Entry" Margin="10" HeightRequest="200" BackgroundColor="White" TextColor="Black" FontSize="24.0" BorderColor="Black" BorderWidth="5"/>
             </VerticalStackLayout>
 
             <!--List of Entries-->             
-            <VerticalStackLayout  Grid.Row="0" Grid.Column="1" Spacing="20">
-                <ListView x:Name="EntriesLV" HeightRequest="800" Background="blue">
+            <VerticalStackLayout  Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Margin="10">
+                <ListView x:Name="EntriesLV" HeightRequest="800">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Grid RowSpacing="1" ColumnSpacing="1" Padding="10">
  
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="2*" />
-                                        </Grid.ColumnDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
 
-                                        <Label Grid.Row="0" Grid.Column="0" Text="list here" BackgroundColor="Pink"/>
-                                        <Label Grid.Row="0" Grid.Column="1" Text="heheh" FontAttributes="Bold" BackgroundColor="Yellow" />
-
+<!---->                             <!--Information for each row / entry-->
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Answer}"/>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Clue}"/>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Date}"/>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Difficulty}"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
-
                     </ListView.ItemTemplate>
                 </ListView>
             </VerticalStackLayout>
