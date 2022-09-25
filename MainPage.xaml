@@ -22,8 +22,31 @@
             </VerticalStackLayout>
 
             <!--List of Entries-->             
-            <VerticalStackLayout BackgroundColor ="Blue"  Grid.Row="0" Grid.Column="1">
+            <VerticalStackLayout  Grid.Row="0" Grid.Column="1" Spacing="20">
+                <ListView x:Name="EntriesLV" HeightRequest="800" Background="blue">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid RowSpacing="1" ColumnSpacing="1" Padding="10">
+ 
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
 
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Row="0" Grid.Column="0" Text="list here" BackgroundColor="Pink"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Text="heheh" FontAttributes="Bold" BackgroundColor="Yellow" />
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+
+                    </ListView.ItemTemplate>
+                </ListView>
             </VerticalStackLayout>
 
             <!--Form-->
@@ -31,7 +54,7 @@
                 <VerticalStackLayout VerticalOptions="Center">
                     <HorizontalStackLayout Margin="20" VerticalOptions="StartAndExpand" HorizontalOptions="Start" Spacing="10">
                         <Label Text="Clue:" FontSize="32.0"/>
-                        <Entry x:Name="Clue" Placeholder="clue goes here" WidthRequest="600" Keyboard="Chat" FontSize="32.0"/>
+                        <Entry x:Name="Clue" Placeholder="clue goes here" WidthRequest="600" Keyboard="Chat" FontSize="32.0" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Margin="20" VerticalOptions="StartAndExpand" HorizontalOptions="Start" Spacing="10">
                         <Label Text="Answer:" FontSize="32.0"/>
