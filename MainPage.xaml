@@ -41,7 +41,7 @@
                         <Label Text="Difficulty:" FontSize="32.0"/>
                         <Entry x:Name="Difficulty" Placeholder="#" WidthRequest="300" Keyboard="Numeric" FontSize="32.0"/>
                         <Label Text="Date:" FontSize="32.0"/>
-                        <Entry x:Name="Date" Placeholder="" WidthRequest="300" Keyboard="Numeric" FontSize="32.0"/>
+                        <Entry x:Name="Date" Placeholder="" WidthRequest="300" Keyboard="Telephone" FontSize="32.0"/>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Border>
