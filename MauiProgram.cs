@@ -2,7 +2,8 @@
 
 public static class MauiProgram
 {
-    //public static IDatabase entryDB = new Database();
+	// the business logic that will send and retrieve data to the database
+    public static IBusinessLogic bl = new BusinessLogic();
 
     public static MauiApp CreateMauiApp()
 	{

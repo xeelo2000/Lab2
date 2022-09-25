@@ -34,14 +34,11 @@ namespace Lab2
         const int MAX_DIFFICULTY = 5;
         int latestId = 0;
 
-        IUserInterface ui;
         IDatabase db;
 
         public BusinessLogic()
         {
             db = new Database();
-            ui = new UserInterface(this);
-            ui.DisplayMenu();
         }
 
 

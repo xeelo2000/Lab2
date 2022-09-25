@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
+using System.Collections.ObjectModel;
 
 // https://www.dotnetperls.com/serialize-list
 // https://www.daveoncsharp.com/2009/07/xml-serialization-of-collections/
@@ -15,6 +16,8 @@ namespace Lab2
         const String filename = "clues.db";
 
         List<Entry> entries;
+        // used to display on the .NET MAUI application
+        private ObservableCollection<Entry> entriesAsObservableCollection = new ObservableCollection<Entry>();
         JsonSerializerOptions options;
 
         public Database()
@@ -101,7 +104,7 @@ namespace Lab2
         }
 
         /// <summary>
-        /// 
+        /// Returns the Entries
         /// </summary>
         /// <returns></returns>
         public List<Entry> GetEntries()
