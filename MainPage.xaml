@@ -6,18 +6,32 @@
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="*"/>
-               
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <VerticalStackLayout BackgroundColor ="Red" Grid.Row="0" Grid.Column="0">
-                <Button Text="Add Entry" Clicked="AddMovie"/>
-                <Button Text="Delete Entry" Clicked="ChangeMovie"/>
-                <Button Text="Edit Entry" Clicked="AddMovie"/>
+            <!--The buttons-->
+            <VerticalStackLayout BackgroundColor ="Red" Grid.Row="0" Grid.Column="0" Spacing="20">
+                <Button Text="Add Entry"/>
+                <Button Text="Delete Entry"/>
+                <Button Text="Edit Entry"/>
+            </VerticalStackLayout>
+
+            <!--List of Entries-->             
+            <VerticalStackLayout BackgroundColor ="Blue"  Grid.Row="0" Grid.Column="1">
+
+            </VerticalStackLayout>
+
+            <!--Form-->
+            <VerticalStackLayout BackgroundColor ="Green"  Grid.Row="1" Grid.ColumnSpan="2">
+                <HorizontalStackLayout Margin="20" VerticalOptions="StartAndExpand" HorizontalOptions="Start">
+                    <Label Text="Clue:" />
+                    <Entry x:Name="Clue" Placeholder="clue goes here" />
+                </HorizontalStackLayout>
             </VerticalStackLayout>
         </Grid>
     </ScrollView>
