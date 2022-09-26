@@ -6,7 +6,7 @@ namespace Lab2
     public interface IBusinessLogic
     {
         InvalidFieldError AddEntry(string clue, string answer, int difficulty, string date);
-        EntryDeletionError DeleteEntry(int entryId);
+        EntryDeletionError DeleteEntry(Entry entryToBeDeleted);
         EntryEditError EditEntry(string clue, string answer, int difficulty, string date, int id);
         Entry FindEntry(int id);
         ObservableCollection<Entry> GetEntries();

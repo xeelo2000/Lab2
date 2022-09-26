@@ -65,7 +65,7 @@ namespace Lab2
             try
             {
                 // TODO
-                //entries.RemoveAt();
+                entries.Remove(entry);
             }
             catch (IOException ioe)
             {

@@ -13,7 +13,7 @@ public partial class MainPage : ContentPage
 	void AddEntry(System.Object sender, System.EventArgs e)
 	{
         var message = MauiProgram.bl.AddEntry(Clue.Text, Answer.Text, Int32.Parse(Difficulty.Text), Date.Text);
-        DisplayAlert("Message:", message.ToString(), "Ok");
+        DisplayAlert("Add Entry Message:", message.ToString(), "Ok");
     }
 
 	//HOW TO GET ID FROM EVENT?????
@@ -21,9 +21,10 @@ public partial class MainPage : ContentPage
 	void DeleteEntry(System.Object sender, System.EventArgs e)
 	{
 		//EntriesLV.SelectedItem = null;
-		//Entry entry = EntriesLV.SelectedItem;
-		
-	}
+		Entry entry = (Entry)EntriesLV.SelectedItem;
+        var message = MauiProgram.bl.DeleteEntry(entry);
+        DisplayAlert("Delete Entry Message:", message.ToString(), "Ok");
+    }
 
 	void EditEntry(System.Object sender, System.EventArgs e)
 	{

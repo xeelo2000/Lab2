@@ -87,10 +87,10 @@ namespace Lab2
             return InvalidFieldError.NoError;
         }
 
-        public EntryDeletionError DeleteEntry(int entryId)
+        public EntryDeletionError DeleteEntry(Entry entryToBeDeleted)
         {
 
-            var entry = db.FindEntry(entryId);
+            var entry = db.FindEntry(entryToBeDeleted.Id);
 
             if (entry != null)
             {
