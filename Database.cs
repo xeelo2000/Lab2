@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
 using System.Collections.ObjectModel;
-using Android.Graphics;
+//using Android.Graphics;
 
 // https://www.dotnetperls.com/serialize-list
 // https://www.daveoncsharp.com/2009/07/xml-serialization-of-collections/
@@ -19,6 +19,9 @@ namespace Lab2
 
         public Database()
         {
+            entries.Add(new Entry("Fragrant conifger", "CEDAR", 1, "9/20/2022", 1));
+            entries.Add(new Entry("Hit, as with snowballs", "PELT", 3, "9/20/2022", 2));
+
             // TODO: delete below?
             options = new JsonSerializerOptions { WriteIndented = true };
         }
@@ -106,10 +109,9 @@ namespace Lab2
         /// <returns>
         /// ObservableCollection<Entry>         the entries variable established at top of file
         /// </returns>
-        public ObservableCollection<Entry> GetEntries
+        public ObservableCollection<Entry> GetEntries()
         {
-            get { return entries; }
-            set { entries = value; }
+            return entries;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Lab2
 {
@@ -42,7 +43,7 @@ namespace Lab2
         }
 
 
-        public List<Entry> GetEntries()
+        public ObservableCollection<Entry> GetEntries()
         {
             return db.GetEntries();
         }

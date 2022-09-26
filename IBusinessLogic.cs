@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Lab2
 {
@@ -8,6 +9,6 @@ namespace Lab2
         EntryDeletionError DeleteEntry(int entryId);
         EntryEditError EditEntry(string clue, string answer, int difficulty, string date, int id);
         Entry FindEntry(int id);
-        List<Entry> GetEntries();
+        ObservableCollection<Entry> GetEntries();
     }
 }
