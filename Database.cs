@@ -13,11 +13,7 @@ namespace Lab2
 {
     public class Database : IDatabase
     {
-        const String filename = "clues.db";
-
-        List<Entry> entries;
-        // used to display on the .NET MAUI application
-        private ObservableCollection<Entry> entriesAsObservableCollection = new ObservableCollection<Entry>();
+        private ObservableCollection<Entry> entries = new ObservableCollection<Entry>();
         JsonSerializerOptions options;
 
         public Database()
@@ -31,12 +27,7 @@ namespace Lab2
         {
             try
             {
-                entry.Id = entries.Count + 1;
                 entries.Add(entry);
-                // TODO: add entry into entriesAsObservableCollection
-
-                string jsonString = JsonSerializer.Serialize(entries, options);
-                File.WriteAllText(filename, jsonString);
             }
             catch (IOException ioe)
             {
@@ -65,10 +56,8 @@ namespace Lab2
         {
             try
             {
-                var result = entries.Remove(entry);
-                string jsonString = JsonSerializer.Serialize(entries, options);
-                File.WriteAllText(filename, jsonString);
-                return true;
+                // TODO
+                //entries.RemoveAt();
             }
             catch (IOException ioe)
             {
@@ -77,6 +66,7 @@ namespace Lab2
             return false;
         }
 
+        // TODO: delete and replace with EditEntry()?
         public bool ReplaceEntry(Entry replacementEntry)
         {
             foreach (Entry entry in entries) // iterate through entries until we find the Entry in question
@@ -91,7 +81,7 @@ namespace Lab2
                     try
                     {
                         string jsonString = JsonSerializer.Serialize(entries, options);
-                        File.WriteAllText(filename, jsonString);
+                        //File.WriteAllText(filename, jsonString);
                         return true;
                     }
                     catch (IOException ioe)
@@ -108,22 +98,23 @@ namespace Lab2
         /// Returns the Entries
         /// </summary>
         /// <returns></returns>
+        // TODO: LoadDatabase() instead?
         public List<Entry> GetEntries()
         {
-            if (!File.Exists(filename))
-            {
-                //File.Create(filename);
-                entries = new List<Entry>();
-                return entries;
-            }
+            //if (!File.Exists(filename))
+            //{
+            //    //File.Create(filename);
+            //    entries = new List<Entry>();
+            //    return entries;
+            //}
 
-            string jsonString = File.ReadAllText(filename);
-            if (jsonString.Length > 0)
-            {
-                entries = JsonSerializer.Deserialize<List<Entry>>(jsonString);
-                // TODO: for-each loop and add each entry in entries into the entriesAsObservableCollection
-            }
-            return entries;
+            //string jsonString = File.ReadAllText(filename);
+            //if (jsonString.Length > 0)
+            //{
+            //    entries = JsonSerializer.Deserialize<List<Entry>>(jsonString);
+            //    // TODO: for-each loop and add each entry in entries into the entriesAsObservableCollection
+            //}
+            //return entries;
         }
     }
 }
