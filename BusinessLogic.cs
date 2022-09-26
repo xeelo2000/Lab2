@@ -52,6 +52,7 @@ namespace Lab2
             return db.FindEntry(id);
         }
 
+        //DISPLAY ALERT FOR RETURN STATEMENTS!!!!!!!
         private InvalidFieldError CheckEntryFields(string clue, string answer, int difficulty, string date)
         {
             if (clue.Length < 1 || clue.Length > MAX_CLUE_LENGTH)

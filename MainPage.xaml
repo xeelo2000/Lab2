@@ -16,9 +16,9 @@
 
             <!--The buttons-->
             <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="20" VerticalOptions="Center">
-                <Button Text="Add Entry" Margin="10" HeightRequest="200" BackgroundColor="White" TextColor="Black" FontSize="24.0" BorderColor="Black" BorderWidth="5"/>
-                <Button Text="Delete Entry" Margin="10" HeightRequest="200" BackgroundColor="White" TextColor="Black" FontSize="24.0" BorderColor="Black" BorderWidth="5"/>
-                <Button Text="Edit Entry" Margin="10" HeightRequest="200" BackgroundColor="White" TextColor="Black" FontSize="24.0" BorderColor="Black" BorderWidth="5"/>
+                <Button Text="Add Entry" Margin="10" HeightRequest="200" BackgroundColor="White" TextColor="Black" FontSize="24.0" BorderColor="Black" BorderWidth="5" Clicked="AddEntry"/>
+                <Button Text="Delete Entry" Margin="10" HeightRequest="200" BackgroundColor="White" TextColor="Black" FontSize="24.0" BorderColor="Black" BorderWidth="5" Clicked="DeleteEntry"/>
+                <Button Text="Edit Entry" Margin="10" HeightRequest="200" BackgroundColor="White" TextColor="Black" FontSize="24.0" BorderColor="Black" BorderWidth="5" Clicked="EditEntry"/>
             </VerticalStackLayout>
 
             <!--List of Entries-->             

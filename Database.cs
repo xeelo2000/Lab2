@@ -111,7 +111,7 @@ namespace Lab2
         {
             if (!File.Exists(filename))
             {
-                File.CreateText(filename);
+                //File.Create(filename);
                 entries = new List<Entry>();
                 return entries;
             }
