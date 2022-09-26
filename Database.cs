@@ -33,6 +33,7 @@ namespace Lab2
             {
                 entry.Id = entries.Count + 1;
                 entries.Add(entry);
+                // TODO: add entry into entriesAsObservableCollection
 
                 string jsonString = JsonSerializer.Serialize(entries, options);
                 File.WriteAllText(filename, jsonString);
@@ -120,6 +121,7 @@ namespace Lab2
             if (jsonString.Length > 0)
             {
                 entries = JsonSerializer.Deserialize<List<Entry>>(jsonString);
+                // TODO: for-each loop and add each entry in entries into the entriesAsObservableCollection
             }
             return entries;
         }

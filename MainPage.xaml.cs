@@ -7,7 +7,7 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-		//EntriesLV.ItemsSource = MauiProgram.entryDB.AllEntries;
+		//EntriesLV.ItemsSource = MauiProgram.entryDB.GetEntries;
 	}
 
 	void AddEntry(System.Object sender, System.EventArgs e)
