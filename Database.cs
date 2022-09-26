@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
 using System.Collections.ObjectModel;
+using Android.Graphics;
 
 // https://www.dotnetperls.com/serialize-list
 // https://www.daveoncsharp.com/2009/07/xml-serialization-of-collections/
@@ -18,11 +19,14 @@ namespace Lab2
 
         public Database()
         {
-            GetEntries();
+            // TODO: delete below?
             options = new JsonSerializerOptions { WriteIndented = true };
         }
 
-
+        /// <summary>
+        /// Adds an entry to the entries variable
+        /// </summary>
+        /// <param name="entry">the new entry to be added</param>
         public void AddEntry(Entry entry)
         {
             try
@@ -35,6 +39,7 @@ namespace Lab2
             }
         }
 
+        // TODO: delete?
         public Entry FindEntry(int id)
         {
             foreach (Entry entry in entries)
@@ -94,27 +99,17 @@ namespace Lab2
             return false;
         }
 
-        /// <summary>
-        /// Returns the Entries
-        /// </summary>
-        /// <returns></returns>
-        // TODO: LoadDatabase() instead?
-        public List<Entry> GetEntries()
-        {
-            //if (!File.Exists(filename))
-            //{
-            //    //File.Create(filename);
-            //    entries = new List<Entry>();
-            //    return entries;
-            //}
 
-            //string jsonString = File.ReadAllText(filename);
-            //if (jsonString.Length > 0)
-            //{
-            //    entries = JsonSerializer.Deserialize<List<Entry>>(jsonString);
-            //    // TODO: for-each loop and add each entry in entries into the entriesAsObservableCollection
-            //}
-            //return entries;
+        /// <summary>
+        /// Will get all the entries that exist in the ObservableCollection
+        /// </summary>
+        /// <returns>
+        /// ObservableCollection<Entry>         the entries variable established at top of file
+        /// </returns>
+        public ObservableCollection<Entry> GetEntries
+        {
+            get { return entries; }
+            set { entries = value; }
         }
     }
 }
