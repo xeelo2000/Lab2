@@ -36,13 +36,15 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-<!---->                             <!--Information for each row / entry-->
+                                    <!--Information for each row / entry-->
                                     <Label Grid.Row="0" Grid.Column="0" Text="{Binding Answer}"/>
-                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Clue}"/>
-                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Date}"/>
-                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Difficulty}"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Clue}"/>
+                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding Date}"/>
+                                    <Label Grid.Row="0" Grid.Column="3" Text="{Binding Difficulty}"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
