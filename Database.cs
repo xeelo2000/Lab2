@@ -25,6 +25,8 @@ namespace Lab2
         public Database()
         {
             filename = $"{appDataPath}/clues.db";
+            String cacheDir = FileSystem.Current.CacheDirectory;
+            GetEntries();
             options = new JsonSerializerOptions { WriteIndented = true };
         }
 
