@@ -19,6 +19,7 @@ namespace Lab2
 
         public Database()
         {
+            // TODO
             entries.Add(new Entry("Fragrant conifger", "CEDAR", 1, "9/20/2022", 1));
             entries.Add(new Entry("Hit, as with snowballs", "PELT", 3, "9/20/2022", 2));
 
