@@ -21,9 +21,6 @@ namespace Lab2
 
         public Database()
         {
-            // TODO
-            entries.Add(new Entry("Fragrant conifger", "CEDAR", 1, "9/20/2022", 1));
-            entries.Add(new Entry("Hit, as with snowballs", "PELT", 3, "9/20/2022", 2));
 
             // TODO: delete below?
             options = new JsonSerializerOptions { WriteIndented = true };
@@ -72,8 +69,14 @@ namespace Lab2
         {
             try
             {
-                // TODO
+                // remove from listEntries and entries
+                listEntries.Remove(entry);
                 entries.Remove(entry);
+
+                // writes updated listEntries to file (with entry removed)
+                string jsonString = JsonSerializer.Serialize(listEntries, options);
+                File.WriteAllText(filename, jsonString);
+                return true;
             }
             catch (IOException ioe)
             {
