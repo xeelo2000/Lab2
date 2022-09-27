@@ -14,15 +14,16 @@ namespace Lab2
 {
     public class Database : IDatabase
     {
-        const String filename = "../../../clues.db";
+        //const String filename = "../../../clues.db";
+        string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        String filename;
         List<Entry> listEntries;
         private ObservableCollection<Entry> entries = new ObservableCollection<Entry>();
         JsonSerializerOptions options;
 
         public Database()
         {
-
-            // TODO: delete below?
+            filename = $"{appDataPath}/clues.db";
             options = new JsonSerializerOptions { WriteIndented = true };
         }
 
