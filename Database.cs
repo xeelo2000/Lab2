@@ -101,14 +101,14 @@ namespace Lab2
         /// <returns></returns>
         public bool ReplaceEntry(Entry replacementEntry)
         {
+            int index = 0;
             foreach (Entry entry in entries) // iterate through entries until we find the Entry in question
             {
                 if (entry.Id == replacementEntry.Id) // found it
                 {
-                    entry.Answer = replacementEntry.Answer;
-                    entry.Clue = replacementEntry.Clue;
-                    entry.Difficulty = replacementEntry.Difficulty;
-                    entry.Date = replacementEntry.Date;         // change it then write it out
+                    // Removes the entry and then adds the modified entry in the same place
+                    entries.RemoveAt(index);
+                    entries.Insert(index, replacementEntry);
 
                     try
                     {
@@ -131,6 +131,7 @@ namespace Lab2
                     }
 
                 }
+                index++;
             }
             return false;
         }
