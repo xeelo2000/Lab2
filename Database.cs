@@ -14,16 +14,31 @@ namespace Lab2
 {
     public class Database : IDatabase
     {
+<<<<<<< Updated upstream
         string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         String filename;
         List<Entry> listEntries;
         private ObservableCollection<Entry> entries = new ObservableCollection<Entry>();
+=======
+        String filename = "clues.db";
+
+        List<Entry> entries;
+        // used to display on the .NET MAUI application
+        private ObservableCollection<Entry> entriesAsObservableCollection = new ObservableCollection<Entry>();
+>>>>>>> Stashed changes
         JsonSerializerOptions options;
 
 
         public Database()
         {
+<<<<<<< Updated upstream
             filename = $"{appDataPath}/clues.db";
+=======
+            String cacheDir = FileSystem.Current.CacheDirectory;
+            filename = $"{cacheDir}/{filename}";
+            Console.WriteLine(filename);
+            GetEntries();
+>>>>>>> Stashed changes
             options = new JsonSerializerOptions { WriteIndented = true };
         }
 
@@ -139,8 +154,13 @@ namespace Lab2
             // If the file doesn't exist, create it and listEntries will be empty
             if (!File.Exists(filename))
             {
+<<<<<<< Updated upstream
                 File.CreateText(filename);
                 listEntries = new List<Entry>();
+=======
+                File.Create(filename);
+                entries = new List<Entry>();
+>>>>>>> Stashed changes
                 return entries;
             }
 
