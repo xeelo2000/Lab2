@@ -66,17 +66,17 @@
                 <VerticalStackLayout VerticalOptions="Center">
                     <HorizontalStackLayout Margin="20" VerticalOptions="StartAndExpand" HorizontalOptions="Start" Spacing="10">
                         <Label Text="Clue:" FontSize="32.0"/>
-                        <Entry x:Name="Clue" Placeholder="clue goes here" WidthRequest="600" Keyboard="Chat" FontSize="32.0" />
+                        <Entry x:Name="Clue" Placeholder="clue goes here" WidthRequest="600" Keyboard="Chat" FontSize="32.0" ClearButtonVisibility="WhileEditing"/>
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Margin="20" VerticalOptions="StartAndExpand" HorizontalOptions="Start" Spacing="10">
                         <Label Text="Answer:" FontSize="32.0"/>
-                        <Entry x:Name="Answer" Placeholder="answer goes here" WidthRequest="700" Keyboard="Chat" FontSize="32.0"/>
+                        <Entry x:Name="Answer" Placeholder="answer goes here" WidthRequest="700" Keyboard="Chat" FontSize="32.0" ClearButtonVisibility="WhileEditing"/>
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Margin="20" VerticalOptions="StartAndExpand" HorizontalOptions="Start" Spacing="10">
                         <Label Text="Difficulty:" FontSize="32.0"/>
-                        <Entry x:Name="Difficulty" Placeholder="#" WidthRequest="300" Keyboard="Numeric" FontSize="32.0"/>
+                        <Entry x:Name="Difficulty" Placeholder="#" WidthRequest="300" Keyboard="Numeric" FontSize="32.0" ClearButtonVisibility="WhileEditing"/>
                         <Label Text="Date:" FontSize="32.0"/>
-                        <Entry x:Name="Date" Placeholder="" WidthRequest="300" Keyboard="Telephone" FontSize="32.0"/>
+                        <Entry x:Name="Date" Placeholder="" WidthRequest="300" Keyboard="Telephone" FontSize="32.0" ClearButtonVisibility="WhileEditing"/>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Border>

@@ -21,6 +21,11 @@ namespace Lab2
 
         public Database()
         {
+            // TODO
+            entries.Add(new Entry("Fragrant conifger", "CEDAR", 1, "9/20/2022", 1));
+            entries.Add(new Entry("Hit, as with snowballs", "PELT", 3, "9/20/2022", 2));
+
+            // TODO: delete below?
             options = new JsonSerializerOptions { WriteIndented = true };
         }
 
@@ -67,12 +72,8 @@ namespace Lab2
         {
             try
             {
-                // removes from the listentries and writes to file
-                listEntries.Remove(entry);
-                string jsonString = JsonSerializer.Serialize(listEntries, options);
-                File.WriteAllText(filename, jsonString);
-
-                return entries.Remove(entry);
+                // TODO
+                entries.Remove(entry);
             }
             catch (IOException ioe)
             {
@@ -95,7 +96,7 @@ namespace Lab2
 
                     try
                     {
-                        string jsonString = JsonSerializer.Serialize(entries, options);
+                        //string jsonString = JsonSerializer.Serialize(entries, options);
                         //File.WriteAllText(filename, jsonString);
                         return true;
                     }

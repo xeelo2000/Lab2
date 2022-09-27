@@ -7,7 +7,7 @@ namespace Lab2
     {
         InvalidFieldError AddEntry(string clue, string answer, int difficulty, string date);
         EntryDeletionError DeleteEntry(Entry entryToBeDeleted);
-        EntryEditError EditEntry(string clue, string answer, int difficulty, string date, int id);
+        EntryEditError EditEntry(Entry entryToBeDeleted, string clue, string answer, int difficulty, string date, int id);
         Entry FindEntry(int id);
         ObservableCollection<Entry> GetEntries();
     }

@@ -56,11 +56,11 @@ namespace Lab2
         //DISPLAY ALERT FOR RETURN STATEMENTS!!!!!!!
         private InvalidFieldError CheckEntryFields(string clue, string answer, int difficulty, string date)
         {
-            if (clue.Length < 1 || clue.Length > MAX_CLUE_LENGTH)
+            if (clue == null || clue.Length < 1 || clue.Length > MAX_CLUE_LENGTH)
             {
                 return InvalidFieldError.InvalidClueLength;
             }
-            if (answer.Length < 1 || answer.Length > MAX_ANSWER_LENGTH)
+            if (answer == null || answer.Length < 1 || answer.Length > MAX_ANSWER_LENGTH)
             {
                 return InvalidFieldError.InvalidAnswerLength;
             }
@@ -120,7 +120,7 @@ namespace Lab2
         /// <param name="date"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public EntryEditError EditEntry(string clue, string answer, int difficulty, string date, int id)
+        public EntryEditError EditEntry(Entry entryToBeEdit, string clue, string answer, int difficulty, string date, int id)
         {
 
             var fieldCheck = CheckEntryFields(clue, answer, difficulty, date);
