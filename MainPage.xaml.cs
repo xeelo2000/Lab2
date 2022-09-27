@@ -1,18 +1,28 @@
 ﻿namespace Lab2;
-
+/**
+Name: XEE LO, PAUL HWANG
+Date: SEPTEMBER 27, 2022
+Description: CS 344: SOFTWARE ENGINEERING - LAB 2
+Bugs: 
+Reflection: 
+*/
 public partial class MainPage : ContentPage
 {
-	//int count = 0;
-
 	public MainPage()
 	{
 		InitializeComponent();
 		EntriesLV.ItemsSource = MauiProgram.bl.GetEntries();
 	}
 
+
+    /// <summary>
+    /// This is the AddEntry button event that will take the user input 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
 	void AddEntry(System.Object sender, System.EventArgs e)
 	{
-        if (int.TryParse(Difficulty.Text, out int difficulty))
+        if (int.TryParse(Difficulty.Text, out int difficulty))      
         {
             var message = MauiProgram.bl.AddEntry(Clue.Text, Answer.Text, difficulty, Date.Text);
             if (message != InvalidFieldError.NoError)
@@ -26,10 +36,14 @@ public partial class MainPage : ContentPage
         }
     }
 
-	
+
+	/// <summary>
+    /// This is the DeleteEntry button that will find the SelectedItem in the listview and return the entry that is selected to be deleted
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
 	void DeleteEntry(System.Object sender, System.EventArgs e)
 	{
-		//EntriesLV.SelectedItem = null;
 		Entry entry = (Entry)EntriesLV.SelectedItem;
 
         if(entry != null)
@@ -46,6 +60,12 @@ public partial class MainPage : ContentPage
         }
     }
 
+
+    /// <summary>
+    /// This is the EditEntry button that will find the entry that was selected in the listview and change its input
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
 	void EditEntry(System.Object sender, System.EventArgs e)
 	{
         Entry entry = (Entry)EntriesLV.SelectedItem;
@@ -63,11 +83,5 @@ public partial class MainPage : ContentPage
             DisplayAlert("Edit Entry Message:", "EntryNotFound", "Ok");
         }
     }
-
-	void GetEntries()
-	{
-
-	}
-	// TODO: write all the functions needed
 }
 

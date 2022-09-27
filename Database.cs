@@ -20,11 +20,13 @@ namespace Lab2
         private ObservableCollection<Entry> entries = new ObservableCollection<Entry>();
         JsonSerializerOptions options;
 
+
         public Database()
         {
             filename = $"{appDataPath}/clues.db";
             options = new JsonSerializerOptions { WriteIndented = true };
         }
+
 
         /// <summary>
         /// Adds an entry to the entries variable
@@ -48,6 +50,11 @@ namespace Lab2
             }
         }
 
+        /// <summary>
+        /// This will find the correct entry to modify or delete
+        /// </summary>
+        /// <param name="id">The id of the entry to be found</param>
+        /// <returns></returns>
         public Entry FindEntry(int id)
         {
             foreach (Entry entry in entries)
@@ -85,7 +92,12 @@ namespace Lab2
             return false;
         }
 
-        // TODO: delete and replace with EditEntry()?
+
+        /// <summary>
+        /// This will take the entry that has been edited and replace with the one in the list
+        /// </summary>
+        /// <param name="replacementEntry">entry that will replace the entry in the list</param>
+        /// <returns></returns>
         public bool ReplaceEntry(Entry replacementEntry)
         {
             foreach (Entry entry in entries) // iterate through entries until we find the Entry in question
@@ -97,9 +109,10 @@ namespace Lab2
                     entry.Difficulty = replacementEntry.Difficulty;
                     entry.Date = replacementEntry.Date;         // change it then write it out
 
+                    
                     try
                     {
-                        string jsonString = JsonSerializer.Serialize(listEntries, options);
+                        string jsonString = JsonSerializer.Serialize(entries, options);
                         File.WriteAllText(filename, jsonString);
                         return true;
                     }
