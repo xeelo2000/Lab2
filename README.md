@@ -25,7 +25,7 @@ EntriesLV.ItemsSource = MauiProgram.bl.GetEntries();
 ## How to Run
 1. Open the `Lab2.sln`file in the Visual Studio
 2. Ensure that an Android device is able to be simulated ([Android Studio](https://developer.android.com/studio) was used for this specific lab)
-3. Run the application via Visual Studio and ensure that the target is the an device that is able to be emulated
+3. Run the application via Visual Studio and ensure that the target is an Android device that is able to be emulated
 ![SCR-20220927-ijs](https://user-images.githubusercontent.com/105162443/192606677-a5195bdc-67a4-4083-b994-27e164b82eac.png)
 4. The app should be exist within the tablet and function there!
 
