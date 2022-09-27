@@ -110,11 +110,19 @@ namespace Lab2
                     entry.Difficulty = replacementEntry.Difficulty;
                     entry.Date = replacementEntry.Date;         // change it then write it out
 
-
                     try
                     {
+                        // serializes the entries with modified entry
                         string jsonString = JsonSerializer.Serialize(entries, options);
                         File.WriteAllText(filename, jsonString);
+
+                        // modifies the listEntries as well with modification
+                        jsonString = File.ReadAllText(filename);
+                        if (jsonString.Length > 0)
+                        {
+                            listEntries = JsonSerializer.Deserialize<List<Entry>>(jsonString);
+                        }
+
                         return true;
                     }
                     catch (IOException ioe)
