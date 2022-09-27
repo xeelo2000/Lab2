@@ -32,3 +32,10 @@ EntriesLV.ItemsSource = MauiProgram.bl.GetEntries();
 ## Alternative Way to Run (Windows / Mac)
 If there are issues that arise with running it via an emulated device, you're able to just target it to be ran just as .NET MAUI Application directly on your computer.
 ![SCR-20220927-iob](https://user-images.githubusercontent.com/105162443/192607007-0e6e73ca-fd7d-4eb8-bbc7-9e447b41457c.png)
+
+## Lab Output (for Professor)
+**Before Insertion:**  
+<img width="1072" alt="SS1" src="https://user-images.githubusercontent.com/105162443/192607131-f6969d3d-357c-405f-8a3a-190a708afe4e.png">
+
+**After Insertion:**  
+<img width="1072" alt="SS2" src="https://user-images.githubusercontent.com/105162443/192607139-10587566-fd02-4c0a-816f-1959dbc1f8cf.png">
