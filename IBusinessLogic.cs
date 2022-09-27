@@ -10,5 +10,6 @@ namespace Lab2
         EntryEditError EditEntry(Entry entryToBeDeleted, string clue, string answer, int difficulty, string date, int id);
         Entry FindEntry(int id);
         ObservableCollection<Entry> GetEntries();
+        void NumIds();
     }
 }

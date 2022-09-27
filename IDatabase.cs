@@ -10,5 +10,7 @@ namespace Lab2
         bool DeleteEntry(Entry entry);
         Entry FindEntry(int id);
         bool ReplaceEntry(Entry replacementEntry);
+
+        int CountList();
     }
 }

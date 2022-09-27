@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
 using System.Collections.ObjectModel;
+using System.Linq;
 //using Android.Graphics;
 
 // https://www.dotnetperls.com/serialize-list
@@ -16,7 +17,7 @@ namespace Lab2
     {
         string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         String filename;
-        List<Entry> listEntries;
+        List<Entry> listEntries = new List<Entry>();
         private ObservableCollection<Entry> entries = new ObservableCollection<Entry>();
         JsonSerializerOptions options;
 
@@ -109,7 +110,7 @@ namespace Lab2
                     entry.Difficulty = replacementEntry.Difficulty;
                     entry.Date = replacementEntry.Date;         // change it then write it out
 
-                    
+
                     try
                     {
                         string jsonString = JsonSerializer.Serialize(entries, options);
@@ -140,7 +141,6 @@ namespace Lab2
             if (!File.Exists(filename))
             {
                 File.CreateText(filename);
-                listEntries = new List<Entry>();
                 return entries;
             }
 
@@ -158,6 +158,17 @@ namespace Lab2
             }
 
             return entries;
+        }
+
+        public int CountList()
+        {
+            if(listEntries.Count != 0)
+            {
+                Entry lastEntry = listEntries.Last();
+                return lastEntry.Id;
+            }
+            Console.WriteLine(listEntries.Count);
+            return 0;
         }
     }
 }

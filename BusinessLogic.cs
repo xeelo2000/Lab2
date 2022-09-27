@@ -42,7 +42,7 @@ namespace Lab2
         const int MAX_CLUE_LENGTH = 250;
         const int MAX_ANSWER_LENGTH = 21;
         const int MAX_DIFFICULTY = 5;
-        int latestId = 0;
+        int latestId;
 
         IDatabase db;
 
@@ -180,6 +180,10 @@ namespace Lab2
             }
 
             return EntryEditError.NoError;
+        }
+        public void NumIds()
+        {
+            latestId = db.CountList();
         }
     }
 }
