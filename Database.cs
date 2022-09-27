@@ -14,7 +14,6 @@ namespace Lab2
 {
     public class Database : IDatabase
     {
-        //const String filename = "../../../clues.db";
         string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         String filename;
         List<Entry> listEntries;
@@ -100,8 +99,8 @@ namespace Lab2
 
                     try
                     {
-                        //string jsonString = JsonSerializer.Serialize(entries, options);
-                        //File.WriteAllText(filename, jsonString);
+                        string jsonString = JsonSerializer.Serialize(listEntries, options);
+                        File.WriteAllText(filename, jsonString);
                         return true;
                     }
                     catch (IOException ioe)
