@@ -40,11 +40,11 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <!--Information for each row / entry-->
-                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Answer}"/>
-                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Clue}"/>
-                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding Date}"/>
-                                    <Label Grid.Row="0" Grid.Column="3" Text="{Binding Difficulty}"/>
+                                    <!--Information for each row / entry TODO: fix format-->
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Answer}" TextColor="Black"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Clue}" TextColor="Black"/>
+                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding Date}" TextColor="Black"/>
+                                    <Label Grid.Row="0" Grid.Column="3" Text="{Binding Difficulty}" TextColor="Black"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
 using System.Collections.ObjectModel;
+//using Android.Graphics;
 
 // https://www.dotnetperls.com/serialize-list
 // https://www.daveoncsharp.com/2009/07/xml-serialization-of-collections/
@@ -13,30 +14,27 @@ namespace Lab2
 {
     public class Database : IDatabase
     {
-        const String filename = "clues.db";
-
-        List<Entry> entries;
-        // used to display on the .NET MAUI application
-        private ObservableCollection<Entry> entriesAsObservableCollection = new ObservableCollection<Entry>();
+        private ObservableCollection<Entry> entries = new ObservableCollection<Entry>();
         JsonSerializerOptions options;
 
         public Database()
         {
-            GetEntries();
+            entries.Add(new Entry("Fragrant conifger", "CEDAR", 1, "9/20/2022", 1));
+            entries.Add(new Entry("Hit, as with snowballs", "PELT", 3, "9/20/2022", 2));
+
+            // TODO: delete below?
             options = new JsonSerializerOptions { WriteIndented = true };
         }
 
-
+        /// <summary>
+        /// Adds an entry to the entries variable
+        /// </summary>
+        /// <param name="entry">the new entry to be added</param>
         public void AddEntry(Entry entry)
         {
             try
             {
-                entry.Id = entries.Count + 1;
                 entries.Add(entry);
-                // TODO: add entry into entriesAsObservableCollection
-
-                string jsonString = JsonSerializer.Serialize(entries, options);
-                File.WriteAllText(filename, jsonString);
             }
             catch (IOException ioe)
             {
@@ -44,6 +42,7 @@ namespace Lab2
             }
         }
 
+        // TODO: delete?
         public Entry FindEntry(int id)
         {
             foreach (Entry entry in entries)
@@ -65,10 +64,8 @@ namespace Lab2
         {
             try
             {
-                var result = entries.Remove(entry);
-                string jsonString = JsonSerializer.Serialize(entries, options);
-                File.WriteAllText(filename, jsonString);
-                return true;
+                // TODO
+                entries.Remove(entry);
             }
             catch (IOException ioe)
             {
@@ -77,6 +74,7 @@ namespace Lab2
             return false;
         }
 
+        // TODO: delete and replace with EditEntry()?
         public bool ReplaceEntry(Entry replacementEntry)
         {
             foreach (Entry entry in entries) // iterate through entries until we find the Entry in question
@@ -91,7 +89,7 @@ namespace Lab2
                     try
                     {
                         string jsonString = JsonSerializer.Serialize(entries, options);
-                        File.WriteAllText(filename, jsonString);
+                        //File.WriteAllText(filename, jsonString);
                         return true;
                     }
                     catch (IOException ioe)
@@ -104,25 +102,15 @@ namespace Lab2
             return false;
         }
 
-        /// <summary>
-        /// Returns the Entries
-        /// </summary>
-        /// <returns></returns>
-        public List<Entry> GetEntries()
-        {
-            if (!File.Exists(filename))
-            {
-                //File.Create(filename);
-                entries = new List<Entry>();
-                return entries;
-            }
 
-            string jsonString = File.ReadAllText(filename);
-            if (jsonString.Length > 0)
-            {
-                entries = JsonSerializer.Deserialize<List<Entry>>(jsonString);
-                // TODO: for-each loop and add each entry in entries into the entriesAsObservableCollection
-            }
+        /// <summary>
+        /// Will get all the entries that exist in the ObservableCollection
+        /// </summary>
+        /// <returns>
+        /// ObservableCollection<Entry>         the entries variable established at top of file
+        /// </returns>
+        public ObservableCollection<Entry> GetEntries()
+        {
             return entries;
         }
     }
