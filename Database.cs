@@ -19,7 +19,7 @@ namespace Lab2
 
         public Database()
         {
-            // TODO
+            // TODO remove below
             entries.Add(new Entry("Fragrant conifger", "CEDAR", 1, "9/20/2022", 1));
             entries.Add(new Entry("Hit, as with snowballs", "PELT", 3, "9/20/2022", 2));
 
@@ -64,9 +64,8 @@ namespace Lab2
         public bool DeleteEntry(Entry entry)
         {
             try
-            {
-                // TODO
-                entries.Remove(entry);
+            {               
+                return entries.Remove(entry);
             }
             catch (IOException ioe)
             {

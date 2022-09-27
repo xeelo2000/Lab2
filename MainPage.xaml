@@ -38,13 +38,22 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
                                     <!--Information for each row / entry TODO: fix format-->
-                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Answer}" TextColor="Black"/>
-                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Clue}" TextColor="Black"/>
-                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding Date}" TextColor="Black"/>
-                                    <Label Grid.Row="0" Grid.Column="3" Text="{Binding Difficulty}" TextColor="Black"/>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Answer}" TextColor="Black" FontSize="20.0"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text=" - " TextColor="Black"/>
+
+                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding Clue}" TextColor="Black" FontSize="20.0"/>
+                                    <Label Grid.Row="0" Grid.Column="3" Text=" - " TextColor="Black"/>
+
+                                    <Label Grid.Row="0" Grid.Column="4" Text="{Binding Date}" TextColor="Black" FontSize="20.0"/>
+                                    <Label Grid.Row="0" Grid.Column="5" Text=" - " TextColor="Black"/>
+
+                                    <Label Grid.Row="0" Grid.Column="6" Text="{Binding Difficulty}" TextColor="Black" FontSize="20.0"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
