@@ -25,8 +25,6 @@ namespace Lab2
         public Database()
         {
             filename = $"{appDataPath}/clues.db";
-            String cacheDir = FileSystem.Current.CacheDirectory;
-            GetEntries();
             options = new JsonSerializerOptions { WriteIndented = true };
         }
 
@@ -162,14 +160,18 @@ namespace Lab2
             return entries;
         }
 
+        /// <summary>
+        /// Counts the observable collection and sets the id to it 
+        /// </summary>
+        /// <returns>the count of observable collection</returns>
         public int CountList()
         {
-            if(listEntries.Count != 0)
+            if(entries.Count != 0)
             {
-                Entry lastEntry = listEntries.Last();
+                Entry lastEntry = entries.Last();
                 return lastEntry.Id;
             }
-            Console.WriteLine(listEntries.Count);
+            
             return 0;
         }
     }

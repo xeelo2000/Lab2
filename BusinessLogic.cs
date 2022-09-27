@@ -113,6 +113,8 @@ namespace Lab2
                 return result;
             }
 
+            NumIds();
+
             // there was no error with any put, create an entry object and add it to the db
             Entry entry = new Entry(clue, answer, difficulty, date, ++latestId);
             db.AddEntry(entry);
@@ -181,6 +183,10 @@ namespace Lab2
 
             return EntryEditError.NoError;
         }
+
+        /// <summary>
+        /// This is the number of ids for the entry
+        /// </summary>
         public void NumIds()
         {
             latestId = db.CountList();
