@@ -14,16 +14,13 @@ namespace Lab2
 {
     public class Database : IDatabase
     {
+        const String filename = "../../../clues.db";
+        List<Entry> listEntries;
         private ObservableCollection<Entry> entries = new ObservableCollection<Entry>();
         JsonSerializerOptions options;
 
         public Database()
         {
-            // TODO remove below
-            entries.Add(new Entry("Fragrant conifger", "CEDAR", 1, "9/20/2022", 1));
-            entries.Add(new Entry("Hit, as with snowballs", "PELT", 3, "9/20/2022", 2));
-
-            // TODO: delete below?
             options = new JsonSerializerOptions { WriteIndented = true };
         }
 
@@ -35,7 +32,13 @@ namespace Lab2
         {
             try
             {
+                // adds the new entry to both the List and ObservableCollection
+                listEntries.Add(entry);
                 entries.Add(entry);
+
+                // serializes all the current entries and writes it to the file
+                string jsonString = JsonSerializer.Serialize(listEntries, options);
+                File.WriteAllText(filename, jsonString);
             }
             catch (IOException ioe)
             {
@@ -43,7 +46,6 @@ namespace Lab2
             }
         }
 
-        // TODO: delete?
         public Entry FindEntry(int id)
         {
             foreach (Entry entry in entries)
@@ -57,14 +59,19 @@ namespace Lab2
         }
 
         /// <summary>
-        /// Deletes an entry 
+        /// Deletes an entry by removing it from the listEntries, entries, and the file
         /// </summary>
         /// 
         /// <param name="entry">An entry, which is presumed to exist</param>
         public bool DeleteEntry(Entry entry)
         {
             try
-            {               
+            {
+                // removes from the listentries and writes to file
+                listEntries.Remove(entry);
+                string jsonString = JsonSerializer.Serialize(listEntries, options);
+                File.WriteAllText(filename, jsonString);
+
                 return entries.Remove(entry);
             }
             catch (IOException ioe)
@@ -104,13 +111,35 @@ namespace Lab2
 
 
         /// <summary>
-        /// Will get all the entries that exist in the ObservableCollection
+        /// If a clues.db doesn't exist, create a new file and listEntries and entries will be empty
+        /// If a clues.db does exist, read in the file and all its possible entries and populate listEntries and entries
         /// </summary>
         /// <returns>
         /// ObservableCollection<Entry>         the entries variable established at top of file
         /// </returns>
         public ObservableCollection<Entry> GetEntries()
         {
+            // If the file doesn't exist, create it and listEntries will be empty
+            if (!File.Exists(filename))
+            {
+                File.CreateText(filename);
+                listEntries = new List<Entry>();
+                return entries;
+            }
+
+            // The file does exist, read it in and populate listEntries with exiting entries
+            string jsonString = File.ReadAllText(filename);
+            if (jsonString.Length > 0)
+            {
+                listEntries = JsonSerializer.Deserialize<List<Entry>>(jsonString);
+            }
+
+            // populates ObservableCollection with existing entries from the file
+            foreach (Entry entry in listEntries)
+            {
+                entries.Add(entry);
+            }
+
             return entries;
         }
     }
