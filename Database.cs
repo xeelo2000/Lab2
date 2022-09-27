@@ -141,13 +141,8 @@ namespace Lab2
             // If the file doesn't exist, create it and listEntries will be empty
             if (!File.Exists(filename))
             {
-<<<<<<< Updated upstream
                 File.CreateText(filename);
                 listEntries = new List<Entry>();
-=======
-                File.Create(filename);
-                entries = new List<Entry>();
->>>>>>> Stashed changes
                 return entries;
             }
 
