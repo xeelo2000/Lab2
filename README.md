@@ -20,7 +20,7 @@ EntriesLV.ItemsSource = MauiProgram.bl.GetEntries();
 
 ## `Database.cs`
 * Connected to the file that serves as the "database"
-* This directly writes and reads from the "database" and is responsible for serialization and deserialization
+* This directly writes to and reads from the "database" and is responsible for serialization and deserialization
 
 ## How to Run
 1. Open the `Lab2.sln`file in the Visual Studio
